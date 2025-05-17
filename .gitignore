@@ -1,0 +1,109 @@
+# Environment & config files
+config.env
+.env
+*.env
+.env.local
+.venv
+venv/
+env/
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.pyc
+__pycache__/
+
+# Python cache and build files
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Temporary files
+temp_audio*.mp3  # Exclude generated audio files
+*.tmp
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Virtual environment (if using)
+venv/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyCharm
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+settings.json
+
+# Package manager files
+Pipfile
+Pipfile.lock
+poetry.lock
+requirements.txt  # Only exclude if you're using a package manager
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Gradio temporary files
+/gradio_temp/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# System files
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment files
+config.env
+*.env
+
+# Temporary files
+temp_audio_*.mp3
