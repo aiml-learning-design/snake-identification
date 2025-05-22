@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+numpy
+pillow
+opencv-python
+tensorflow-macos
+#tensorflow-metal  # For M1/M2 GPU acceleration
+scikit-learn
+joblib
+python-multipart

@@ -1,0 +1,14 @@
+species,common_name,family,region,venom_type,toxicity_level,antivenom_available,conservation_status,habitat,avg_length,max_length
+Argyrogena fasciolata,Banded Racer,Colubridae,"India, Pakistan, Bangladesh, Nepal",Non-venomous,Non-toxic,No,Least Concern,"Grasslands, scrublands",90,150
+Xenochrophis piscator,Checkered Keelback,Colubridae,Throughout India,Mildly venomous,Non-toxic,No,Least Concern,Freshwater habitats,75,175
+Ptyas mucosa,Common Rat Snake,Colubridae,Pan-India,Non-venomous,Non-toxic,No,Least Concern,"Urban areas, agricultural fields",150,300
+Eryx conicus,Common Sand Boa,Boidae,Throughout India,Non-venomous,Non-toxic,No,Least Concern,"Arid regions, scrublands",60,80
+Coelognathus helena,Common Trinket,Colubridae,"India, Sri Lanka",Non-venomous,Non-toxic,No,Least Concern,"Forests, plantations",120,230
+Ahaetulla nasuta,Green Tree Vine,Colubridae,Peninsular India,Mildly venomous,Non-toxic,No,Least Concern,"Forests, gardens",150,200
+Python molurus,Indian Rock Python,Pythonidae,Throughout India,Non-venomous,Non-toxic,No,Near Threatened,"Forests, grasslands",300,450
+Bungarus caeruleus,Common Krait,Elapidae,Pan-India,Neurotoxic,Extremely toxic,Yes,Least Concern,"Agricultural fields, rural areas",90,150
+Ophiophagus hannah,King Cobra,Elapidae,"Western Ghats, Northeast",Neurotoxic,Extremely toxic,Yes,Vulnerable,Dense forests,300,550
+Naja kaouthia,Monocled Cobra,Elapidae,North-East India,"Neurotoxic, Cytotoxic",Extremely toxic,Yes,Least Concern,Agricultural lands,150,230
+Daboia russelii,Russell's Viper,Viperidae,Throughout India,"Hemotoxic, Cytotoxic",Extremely toxic,Yes,Least Concern,"Grasslands, scrublands",120,165
+Echis carinatus,Saw-scaled Viper,Viperidae,Arid regions of India,Hemotoxic,Extremely toxic,Yes,Least Concern,Dry rocky areas,40,80
+Naja naja,Spectacled Cobra,Elapidae,Pan-India,"Neurotoxic, Cytotoxic",Extremely toxic,Yes,Least Concern,Varied habitats,120,220
