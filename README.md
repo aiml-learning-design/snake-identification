@@ -148,23 +148,62 @@ snake availability
 
 
 
-Augmentation Sequence:
+## Augmentation Sequence:
 
 
-# Correct order:
-img = load_image()
-img = species_specific_augment(img)  # e.g., hood expansion
-img = general_snake_augment(img)     # from get_snake_augmenter()
-img = resize(img)
+### Correct order:
+- img = load_image()
+- img = species_specific_augment(img)  # e.g., hood expansion
+- img = general_snake_augment(img)     # from get_snake_augmenter()
+- img = resize(img)
 
-Memory Considerations:
+### Memory Considerations:
 
 # For large datasets, use generator approach:
-train_datagen.fit(X_train)  # Compute internal statistics
+- train_datagen.fit(X_train)  # Compute internal statistics
 
 
-Debugging Augmentations:
-if species == "Ophiophagus hannah":
-plt.imshow(img)
-plt.title("Augmented King Cobra")
-plt.show()
+### Debugging Augmentations:
+- if species == "Ophiophagus hannah":
+- plt.imshow(img)
+- plt.title("Augmented King Cobra")
+- plt.show()
+
+
+
+
+### PIL.Image.open()
+
+- PIL.Image.open()
+- PIL (Pillow)
+- RGB 
+- PIL.Image.Image object 
+- PyTorch workflows 
+- PyTorch workflows
+- (need to convert with np.array)
+
+### cv2.imread()
+- OpenCV 
+- BGR (channels are flipped)
+- NumPy ndarray 
+- OpenCV-heavy workflows 
+- cv2.resize(img, (w, h))
+- returns NumPy array
+- OpenCV loads images in BGR
+- img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+- This is clean, fast, and works well with scikit-learn or TensorFlow pipelines.
+
+
+### MobileNetV2
+- MobileNetV2 is good at extracting features from images.
+
+
+### UI
+- Pillow (PIL)
+  - used to display image nicely
+- OpenCV
+  - used for preprocessing + prediction
+
+
+
+

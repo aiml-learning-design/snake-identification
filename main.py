@@ -1,10 +1,12 @@
 from contextlib import asynccontextmanager
 
 import uvicorn
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
-from api.predict import predict_snake_info, load_resources
+from api.predict import predict_snake_info
 
 
 @asynccontextmanager
@@ -16,19 +18,14 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Snake Identification API")
 
-# Add CORS middleware
+# CORS setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # or ["http://localhost:8501"]
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.responses import JSONResponse
-from api.predict import predict_snake_info
-
-app = FastAPI()
 
 
 @app.post("/predict")
@@ -61,7 +58,7 @@ async def predict(file: UploadFile = File(...)):
             )
 
         # Process the file
-        result = await predict_snake_info(file)
+        result = await predict_snake_info(img_bytes)
         if "error" in result:
             return JSONResponse(content=result, status_code=400)
         return result
