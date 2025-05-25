@@ -15,6 +15,24 @@ class MetadataHandler:
     def get_classes(self):
         return self.metadata['species'].unique()
 
+    def get_toxicity_level(self, species_name: str):
+        info = self.get_species_info(species_name)
+        return info.get('toxicity_level', 'Unknown')
+
+    def get_venom_type(self, species_name: str):
+        info = self.get_species_info(species_name)
+        return info.get('venom_type', 'Unknown')
+
+    def get_geo_info(self, species_name: str):
+        info = self.get_species_info(species_name)
+        return info.get('region', 'Unknown')
+
+    def get_habitat_info(self, species_name: str):
+        info = self.get_species_info(species_name)
+        return info.get('habitat', 'Unknown')
+
+
+
   #  def get_label_encoder(self):
        # class_to_idx = {name: idx for idx, name in enumerate(self.get_classes())}
        # for tuple use list(enumerate(classes)) #output = [

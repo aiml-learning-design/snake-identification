@@ -3,14 +3,17 @@ import os
 import joblib
 import numpy as np
 import pandas as pd
+from sklearn.utils import compute_class_weight
+from tensorflow.keras.callbacks import ReduceLROnPlateau
 from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.callbacks import EarlyStopping
 
 from src.data_preparation import DatasetBuilder
 from src.metadata_handler import MetadataHandler
-from src.model_builder import ModelBuilder
+from src.model_builder import ModelBuilder, get_data_generators
 import seaborn as sns
 
 os.makedirs("models", exist_ok=True)
@@ -129,12 +132,33 @@ class TrainModel:
                                                             stratify=y_species
                                                             )
 
+        from collections import Counter
+        print("Label distribution in y_train:", Counter(np.argmax(y_train, axis=1)))
+        print("Label distribution in y_test:", Counter(np.argmax(y_test, axis=1)))
+
         # Verify shapes after split
         print(f"\nAfter split:")
         print(f"X_train shape: {X_train.shape}")
 
-        model = self.model_builder.build_snake_model(y_train)
-        model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=10, batch_size=8)
+        train_gen, val_gen = get_data_generators('data/dataset')
+        model = self.model_builder.build_snake_model()
+        # model = self.model_builder.build_dnn(X_train)
+
+        early_stop = [
+            EarlyStopping(
+                monitor='val_accuracy',  # You can monitor 'val_accuracy' instead
+                patience=8,  # Number of epochs to wait after no improvement
+                restore_best_weights=True,  # Restore weights from the best epoch
+                verbose=1),
+            ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=3, min_lr=1e-6, verbose=1)
+        ]
+        y_train_labels = np.argmax(y_train, axis=1)
+        class_weights = compute_class_weight('balanced', classes=np.unique(y_train_labels), y=y_train_labels)
+        class_weight_dict = dict(enumerate(class_weights))
+
+        model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=30,
+                  batch_size=8, callbacks=[early_stop])
+        #  , class_weight=class_weight_dict)
 
         print("\nModel Evaluation:")
 
@@ -142,7 +166,7 @@ class TrainModel:
 
         self.evaluate_model(model, X_test, y_test, label_encode)
 
-        model.save("models/snake_identifier_model.h5")
+        model.save("models/snake_identifier_model.keras")
         joblib.dump(builder.label_encoder, "models/species_encoder.pkl")
 
 

@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, MultiLabelBinarizer
 from tqdm import tqdm
 
 IMAGE_SIZE = (224, 224)
@@ -11,10 +11,19 @@ class DatasetBuilder:
         self.data_dir = data_dir  # data/raw_images
         self.metadata_handler = metadata_handler
         self.label_encoder = LabelEncoder()
+        self.venom_encode = MultiLabelBinarizer()
+        self.toxicity_encoder = MultiLabelBinarizer()
+        self.geo_encoder = MultiLabelBinarizer()
+        self.habitat_encoder = MultiLabelBinarizer()
 
-    def load_image_and_labels(self):
+
+def load_image_and_labels(self):
         images = []
         species_labels = []
+        venom_labels = []
+        toxicity_labels = []
+        geo_labels = []
+        habitat_labels = []
 
         for species, img_files in tqdm(self.metadata_handler.get_all_species().items()):
             for img_file in img_files:
@@ -24,9 +33,18 @@ class DatasetBuilder:
                     img = cv2.resize(img, IMAGE_SIZE)
                     images.append(img)
                     species_labels.append(species)
+                    venom_labels.append(self.metadata_handler.get_venom_type(species))
+                    toxicity_labels.append(self.metadata_handler.get_toxicity_level(species))
+                    geo_labels.append(self.metadata_handler.get_geo_info(species))
+                    habitat_labels.append(self.metadata_handler.get_habitat_info(species))
                 except Exception as e:
                     print(f"Skipping {img_file} due to error: {str(e)}")
                     continue
+
+        venom_labels = self.venom_encode.fit_transform(venom_labels)
+        toxicity_labels = self.toxicity_encoder.fit_transform(toxicity_labels)
+        geo_labels = self.geo_encoder.fit_transform(geo_labels)
+        habitat_labels = self.habitat_encoder.fit_transform(habitat_labels)
 
         images = np.array(images) / 255.0
         species_labels = self.label_encoder.fit_transform(species_labels)

@@ -16,7 +16,6 @@ async def predict_snake_info(img_bytes: bytes):
             return {"error": "Uploaded image is empty"}
 
         cv_image = read_image_bytes(img_bytes)
-
         preprocessed = preprocess_image(cv_image)
         input_tensor = np.expand_dims(preprocessed, axis=0)
         species_pred = model.predict(input_tensor)
@@ -33,7 +32,7 @@ async def predict_snake_info(img_bytes: bytes):
 
 def load_resources():
     global model, species_encoder
-    model = load_model("models/snake_identifier_model.h5")
+    model = load_model("models/snake_identifier_model.keras")
     species_encoder = load("models/species_encoder.pkl")
 
 

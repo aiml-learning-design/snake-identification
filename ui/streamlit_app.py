@@ -15,7 +15,7 @@ Upload an image of a snake, and the system will identify:
 - Possible **venom types**
 - Likely **geographical regions**
 """)
-uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png", "JPG", "JPEG", "PNG"])
 
 if uploaded_file is not None:
     uploaded_file.seek(0)

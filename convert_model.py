@@ -3,7 +3,7 @@ from tensorflow.keras.models import save_model
 import tensorflow as tf
 
 # Load the SavedModel as a layer
-model_layer = TFSMLayer("models/snake_identifier_model",
+model_layer = TFSMLayer("models/snake_identifier_model.keras",
                         call_endpoint='serving_default')
 
 # Build a new model with this layer

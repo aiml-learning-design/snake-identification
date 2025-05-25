@@ -20,7 +20,7 @@ location_encoder = None
 def load_resources():
     global model, species_encoder, venom_encoder, location_encoder
     if model is None:
-        model = load_model("models/snake_identifier_model")
+        model = load_model("models/snake_identifier_model.keras")
         species_encoder = joblib.load("models/species_encoder.pkl")
         venom_encoder = joblib.load("models/venom_encoder.pkl")
         location_encoder = joblib.load("models/location_encoder.pkl")
