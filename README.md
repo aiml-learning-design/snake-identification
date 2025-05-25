@@ -205,5 +205,8 @@ snake availability
   - used for preprocessing + prediction
 
 
+### To find all imports
+- pipreqs . --force
+
 
 
