@@ -11,3 +11,4 @@ seaborn
 streamlit
 uvicorn
 tqdm
+scikeras
