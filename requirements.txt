@@ -11,4 +11,3 @@ seaborn
 streamlit
 uvicorn
 tqdm
-tensorflow==2.15.0

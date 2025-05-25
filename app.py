@@ -3,10 +3,10 @@ import cv2
 import numpy as np
 import streamlit as st
 from PIL import Image
-from tensorflow.keras.models import load_model
-from joblib import load
 from src.image_handler import preprocess_image
 from src.metadata_handler import MetadataHandler
+import joblib
+
 
 # Streamlit UI
 st.set_page_config(page_title="Snake Identifier", layout="centered")
@@ -15,8 +15,8 @@ st.title("Snake Identification Tool")
 # Load resources once
 @st.cache_resource
 def load_resources():
-    model = load_model("snake_identifier_model.keras")
-    species_encoder = load("species_encoder.pkl")
+    model = joblib.load("snake_identifier_model.pkl")
+    species_encoder = joblib.load("species_encoder.pkl")
     metadata_handler = MetadataHandler("data/image_metadata.csv")
     return model, species_encoder, metadata_handler
 
