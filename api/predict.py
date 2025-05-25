@@ -4,6 +4,8 @@ from tensorflow.keras.models import load_model
 from src.image_handler import preprocess_image
 from joblib import load
 
+from src.metadata_handler import MetadataHandler
+
 model = None
 species_encoder = None
 
@@ -21,9 +23,15 @@ async def predict_snake_info(img_bytes: bytes):
         species_pred = model.predict(input_tensor)
         predicted_label = np.argmax(species_pred, axis=1)
         species_label = species_encoder.inverse_transform(predicted_label)[0]
-
+        metadata_handler = MetadataHandler("data/image_metadata.csv")
         return {
-            "species": species_label
+            "species": species_label,
+            "CommonName":  metadata_handler.get_common_name(species_label),
+            "Venom": metadata_handler.get_venom_type(species_label),
+            "Toxicity": metadata_handler.get_toxicity_level(species_label),
+            "Anti Venom Available" : metadata_handler.is_anti_venom_available(species_label),
+            "Location": metadata_handler.get_geo_info(species_label),
+            "Habitat": metadata_handler.get_habitat_info(species_label)
         }
 
     except Exception as e:

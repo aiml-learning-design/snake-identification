@@ -31,6 +31,13 @@ class MetadataHandler:
         info = self.get_species_info(species_name)
         return info.get('habitat', 'Unknown')
 
+    def get_common_name(self, species_name: str):
+        info = self.get_species_info(species_name)
+        return info.get('common_name', 'Unknown')
+
+    def is_anti_venom_available(self, species_name: str):
+        info = self.get_species_info(species_name)
+        return info.get('antivenom_available', 'Unknown')
 
 
   #  def get_label_encoder(self):

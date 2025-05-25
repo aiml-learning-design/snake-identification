@@ -38,15 +38,13 @@ if uploaded_file is not None:
                 else:
                     st.subheader("Prediction Results")
                     st.markdown(f"**Species:** `{result['species']}`")
+                    st.markdown(f"**Common Name:** `{result['CommonName']}`")
+                    st.markdown(f"**Venom Types:** `{result['Venom']}`")
+                    st.markdown(f"**Anti Venom Available:** `{result['Anti Venom Available']}`")
+                    st.markdown(f"**Toxicity Level:** `{result['Toxicity']}`")
+                    st.markdown(f"**Likely Geographical Regions:** `{result['Location']}`")
+                    st.markdown(f"**Habitat Environment:** `{result['Habitat']}`")
 
-                    venom_types = result.get("venom_types", [])
-                    regions = result.get("geographical_regions", [])
-
-                    st.markdown("**Venom Types:**")
-                    st.markdown(", ".join(venom_types) if venom_types else "No venom detected.")
-
-                    st.markdown("**Likely Geographical Regions:**")
-                    st.markdown(", ".join(regions) if regions else "Unknown region.")
 
             else:
                 st.error(f"API Error: {response.status_code} - {response.text}")
