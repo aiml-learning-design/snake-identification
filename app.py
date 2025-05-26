@@ -17,7 +17,7 @@ st.title("Snake Identification Tool")
 @st.cache_resource
 def load_resources():
     model = load_model("snake_identifier_model.keras")
-    species_encoder = joblib.load("species_encoder.pkl")
+    species_encoder = joblib.load("specie_encoder.pkl")
     metadata_handler = MetadataHandler("image_metadata.csv")
     return model, species_encoder, metadata_handler
 
