@@ -140,7 +140,6 @@ class TrainModel:
         print(f"\nAfter split:")
         print(f"X_train shape: {X_train.shape}")
 
-        train_gen, val_gen = get_data_generators('data/dataset')
         model = self.model_builder.build_snake_model()
         # model = self.model_builder.build_dnn(X_train)
 
@@ -150,15 +149,14 @@ class TrainModel:
                 patience=8,  # Number of epochs to wait after no improvement
                 restore_best_weights=True,  # Restore weights from the best epoch
                 verbose=1),
-            ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=3, min_lr=1e-6, verbose=1)
+            ReduceLROnPlateau(monitor='val_accuracy', factor=0.5, patience=3, min_lr=1e-6, verbose=1)
         ]
         y_train_labels = np.argmax(y_train, axis=1)
         class_weights = compute_class_weight('balanced', classes=np.unique(y_train_labels), y=y_train_labels)
         class_weight_dict = dict(enumerate(class_weights))
 
         model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=30,
-                  batch_size=8, callbacks=[early_stop])
-        #  , class_weight=class_weight_dict)
+                  batch_size=8, callbacks=[early_stop] , class_weight=class_weight_dict)
 
         print("\nModel Evaluation:")
 
@@ -167,7 +165,7 @@ class TrainModel:
         self.evaluate_model(model, X_test, y_test, label_encode)
 
         model.save("models/snake_identifier_model.keras")
-        joblib.dump(builder.label_encoder, "models/species_encoder.pkl")
+        joblib.dump(builder.label_encoder, "models/specie_encoder.pkl")
 
 
 if __name__ == "__main__":

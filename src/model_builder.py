@@ -89,7 +89,8 @@ class ModelBuilder:
         x = base_model.output
         x = GlobalAveragePooling2D()(x)
         x = Dropout(0.5)(x)
-        x = Dense(512, activation='swish', kernel_regularizer=l2(0.01))(x)
+        x = Dense(256, activation='relu', kernel_regularizer=l2(0.01))(x)
+        x = BatchNormalization()(x)
 
         #  x = Dense(256, activation='relu', kernel_regularizer=l2(0.01))(x)
         # x = BatchNormalization()(x)

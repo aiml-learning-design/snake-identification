@@ -61,7 +61,37 @@ Upload an image of a snake, and the system will identify:
 - Its **species**
 - Possible **venom types**
 - Likely **geographical regions**
+
 """)
+
+st.markdown("""
+<div style="display: flex; justify-content: space-between;">
+    <div style="width: 48%;">
+        <h4>Non-Venomous</h4>
+        <ul>
+            <li>Banded Racer</li>
+            <li>Checkered Keelback</li>
+            <li>Common Rat Snake</li>
+            <li>Common Sand Boa</li>
+            <li>Common Trinket</li>
+            <li>Green Tree Vine</li>
+            <li>Indian Rock Python</li>
+        </ul>
+    </div>
+    <div style="width: 48%;">
+        <h4>Venomous</h4>
+        <ul>
+            <li>Common Krait</li>
+            <li>King Cobra</li>
+            <li>Monocled Cobra</li>
+            <li>Russell's Viper</li>
+            <li>Saw-scaled Viper</li>
+            <li>Spectacled Cobra</li>
+        </ul>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 
 uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png", "JPG", "JPEG", "PNG"])
 
