@@ -1,3 +1,4 @@
+import base64
 import io
 import cv2
 import numpy as np
@@ -178,7 +179,20 @@ if uploaded_file is not None:
     uploaded_file.seek(0)
     img_bytes = uploaded_file.read()
     image = Image.open(io.BytesIO(img_bytes))
-    st.image(image, caption="Uploaded Image", use_container_width=True)
+
+    # Display scaled image
+    image_base64 = base64.b64encode(img_bytes).decode()
+
+    st.markdown(
+        f"""
+        <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0;">
+            <img src="data:image/png;base64,{image_base64}" 
+                 style="width: 50%; height: auto; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);" 
+                 alt="Uploaded Snake Image">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     with st.spinner("Predicting..."):
         result = predict_snake_info(img_bytes)
