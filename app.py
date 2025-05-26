@@ -251,10 +251,6 @@ with tab2:
             ["Venomous", "Non-Venomous"],
             horizontal=True
         )
-        user_email = st.text_input(
-            "Your email (optional)",
-            placeholder="For follow-up questions"
-        )
 
     if st.button("Submit Correction", type="primary"):
         if correction_file and correct_species:
@@ -274,7 +270,6 @@ with tab2:
                     f.write(correction_file.getbuffer())
 
                 st.success(f"✅ Thank you! Your correction has been recorded.")
-                st.balloons()
             except Exception as e:
                 st.error(f"❌ Error saving your correction: {str(e)}")
         else:
