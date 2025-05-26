@@ -59,8 +59,29 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Create tabs FIRST before any other content
-tab1, tab2 = st.tabs(["📷 Identify Snake", "📤 Incorrect Prediction?"])
+# Inject custom CSS for tab styling
+# Inject CSS to style the tab labels
 
+
+# Custom CSS for tabs
+st.markdown("""
+<style>
+    /* Targets ALL tab labels */
+    div[data-testid="stTabs"] button div p {
+        font-size: 20px !important;
+        font-weight: 900 !important;
+    }
+    
+    /* Active tab highlight */
+    div[data-testid="stTabs"] button[aria-selected="true"] {
+        background-color: #f0f2f6 !important;
+        border-bottom: 3px solid #ff4b4b !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Create tabs with larger bold text
+tab1, tab2 = st.tabs(["📷 Identify Snake", "📤 Incorrect Prediction?"])
 with tab1:
     # Header content
     st.markdown("""
