@@ -5,6 +5,7 @@ import streamlit as st
 from PIL import Image
 from src.image_handler import preprocess_image
 from src.metadata_handler import MetadataHandler
+from tensorflow.keras.models import load_model
 import joblib
 
 
@@ -15,7 +16,7 @@ st.title("Snake Identification Tool")
 # Load resources once
 @st.cache_resource
 def load_resources():
-    model = joblib.load("snake_identifier_model.pkl")
+    model = load_model("models/snake_identifier_model.keras")
     species_encoder = joblib.load("species_encoder.pkl")
     metadata_handler = MetadataHandler("data/image_metadata.csv")
     return model, species_encoder, metadata_handler

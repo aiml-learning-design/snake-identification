@@ -166,7 +166,7 @@ class TrainModel:
 
         self.evaluate_model(model, X_test, y_test, label_encode)
 
-        joblib.dump(model, "models/snake_identifier_model.pkl")
+        model.save("models/snake_identifier_model.keras")
         joblib.dump(builder.label_encoder, "models/species_encoder.pkl")
 
 
