@@ -9,9 +9,51 @@ from tensorflow.keras.models import load_model
 import joblib
 
 
-# Streamlit UI
+
+# Full-width layout
 st.set_page_config(page_title="Snake Identifier", layout="wide")
-st.title("Snake Identification Tool")
+
+# Custom Header with full width and styles
+st.markdown("""
+<style>
+[data-testid="stAppViewContainer"] > .main {
+    padding-left: 0rem;
+    padding-right: 0rem;
+}
+
+.block-container {
+    padding: 0rem 2rem 2rem 2rem;
+    max-width: 100% !important;
+}
+
+.header-container {
+    width: 100%;
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    text-align: center;
+    margin-bottom: 25px;
+}
+.header-container h1 {
+    color: #f1c40f;
+    font-size: 52px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+.header-container p {
+    color: #ecf0f1;
+    font-size: 20px;
+    margin-top: 0;
+}
+</style>
+
+<div class="header-container">
+    <h1>Snake Identification Tool 🐍</h1>
+    <p>Upload a snake image and instantly identify its species, venom level, habitat, and more!</p>
+</div>
+""", unsafe_allow_html=True)
 
 # Load resources once
 @st.cache_resource
@@ -57,17 +99,54 @@ def predict_snake_info(img_bytes: bytes):
 
 
 st.markdown("""
-Upload an image of a snake, and the system will identify:
-- Its **species**
-- Possible **venom types**
-- Likely **geographical regions**
+<style>
+.snake-info-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 3%;
+}
+.snake-column {
+    flex: 1;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+.snake-column h3 {
+    text-align: center;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+.non-venomous h3 {
+    background-color: #4CAF50; /* Green */
+}
+.venomous h3 {
+    background-color: #f44336; /* Red */
+}
+.snake-column ul {
+    padding-left: 20px;
+    font-size: 16px;
+}
+.heading-block {
+    background-color: #2c3e50;
+    color: white;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+</style>
 
-""")
+<div class="heading-block">
+    <h2>Supported Snake Categories</h2>
+    <p>Below is the list of Indian snakes currently supported by the identification system, grouped by venom type.</p>
+</div>
 
-st.markdown("""
-<div style="display: flex; justify-content: space-between;">
-    <div style="width: 48%;">
-        <h4>Non-Venomous</h4>
+<div class="snake-info-container">
+    <div class="snake-column non-venomous">
+        <h3>🟢 Non-Venomous</h3>
         <ul>
             <li>Banded Racer</li>
             <li>Checkered Keelback</li>
@@ -78,8 +157,8 @@ st.markdown("""
             <li>Indian Rock Python</li>
         </ul>
     </div>
-    <div style="width: 48%;">
-        <h4>Venomous</h4>
+    <div class="snake-column venomous">
+        <h3>🔴 Venomous</h3>
         <ul>
             <li>Common Krait</li>
             <li>King Cobra</li>
