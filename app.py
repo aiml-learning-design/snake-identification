@@ -10,7 +10,7 @@ import joblib
 
 
 # Streamlit UI
-st.set_page_config(page_title="Snake Identifier", layout="centered")
+st.set_page_config(page_title="Snake Identifier", layout="wide")
 st.title("Snake Identification Tool")
 
 # Load resources once
